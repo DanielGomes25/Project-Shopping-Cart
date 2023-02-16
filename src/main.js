@@ -1,6 +1,6 @@
 import { searchCep } from './helpers/cepFunctions';
 import { createProductElement } from './helpers/shopFunctions';
-import { fetchProductsList } from './helpers/fetchFunctions';
+import { fetchProduct, fetchProductsList } from './helpers/fetchFunctions';
 import './style.css';
 
 const produtsElement = document.querySelector('.products');
