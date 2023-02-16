@@ -11,16 +11,15 @@ describe('Teste a função fetchProduct', () => {
 await fetchProduct('MLB1405519561');
 expect(fetch).toHaveBeenCalled();
   });
-  it('testa se a função fetchProduct for chamada com o argumento "MLB1405519561" a função fetch utiliza o endpoint "https://api.mercadolibre.com/items/MLB1405519561";', async () => {
-   const result = await fetchProduct('MLB1405519561');
-    expect(result).toHaveBeenCalledWith("https://api.mercadolibre.com/items/MLB1405519561")
+  it('testa se a função fetchProduct for chamada com o argumento "MLB1405519561" a função fetch utiliza o endpoint "https://api.mercadolibre.com/items/MLB1405519561"', async () => {
+   await fetchProduct('MLB1405519561');
+    expect(fetch).toHaveBeenCalledWith('https://api.mercadolibre.com/items/MLB1405519561')
   })
-  it('Teste se o retorno da função fetchProduct com o argumento do produto "MLB1405519561" é uma estrutura de dados igual ao objeto produto que já está importado no arquivo.',async () => {
+  it('Teste se o retorno da função fetchProduct com o argumento do produto "MLB1405519561" é uma estrutura de dados igual ao objeto produto que já está importado no arquivo.', async () => {
     const result = await fetchProduct('MLB1405519561');
     expect(result).toEqual(product);
   })
   it('este se, ao chamar a função fetchProduct sem argumento, retorna um erro com a mensagem: "ID não informado".', async () => {
-    const result = await fetchProduct();
-    expect(result).toThrow('ID não informado');
+   await expect(fetchProduct()).rejects.toThrow(new Error('ID não informado'))
   })
 });

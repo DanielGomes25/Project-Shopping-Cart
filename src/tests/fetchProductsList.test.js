@@ -21,4 +21,7 @@ describe('Teste a função fetchProductsList', () => {
    const result =  await fetchProductsList('computador');
     expect(result).toEqual(computadorSearch);
   });
+  it('este se, ao chamar a função fetchProductList sem argumento, retorna um erro com a mensagem: "Termo de busca não informado"', async () => {
+    await expect(fetchProductsList()).rejects.toThrow(new Error('Termo de busca não informado'))
+   });
 });
