@@ -1,7 +1,8 @@
 import { searchCep } from './helpers/cepFunctions';
-import { createProductElement } from './helpers/shopFunctions';
+import { createCartProductElement, createProductElement } from './helpers/shopFunctions';
 import { fetchProduct, fetchProductsList } from './helpers/fetchFunctions';
 import './style.css';
+import { getSavedCartIDs } from './helpers/cartFunctions';
 
 const produtsElement = document.querySelector('.products');
 document.querySelector('.cep-button').addEventListener('click', searchCep);
@@ -38,3 +39,13 @@ try {
   erroMensag.className = 'error';
   document.body.appendChild(erroMensag);
 }
+const getLocalStorage = async () => {
+  const newPromisse = await getSavedCartIDs();
+  const mapPromisse = newPromisse.map((promise) => fetchProduct(promise));
+  const allPromisses = await Promise.all(mapPromisse);
+  allPromisses.forEach((promise) => {
+    const creat = createCartProductElement(promise);
+    document.querySelector('.cart__products').appendChild(creat);
+  });
+};
+getLocalStorage();
